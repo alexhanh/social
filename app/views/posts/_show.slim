@@ -1,0 +1,6 @@
+hr
+p
+  span.username= link_to post.author.full_name, post.author
+  span.post_content<= post.content
+  br
+  = time_ago_in_words(post.created_at) + " ago"

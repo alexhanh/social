@@ -1,0 +1,17 @@
+h1= @user.full_name
+ul
+  li= "Member since " + @user.created_at.to_date.to_s(:long)
+  li= "Has #{pluralize(@user.friendships.count, 'friend')}"
+
+/ Hide friendship stuff on user's own profile
+- if current_user.id != @user.id
+
+  - if current_user.is_friend_with?(@user)
+    p= "You are friends with #{@user.full_name}!"
+  - else
+    = link_to "Befriend", befriend_users_path(friend_id: @user.id), method: "post"
+
+- for post in @user.received_posts
+  = render partial: "posts/show", locals: { post: post }
+
+= render partial: "posts/form", locals: { recipient_id: @user.id }

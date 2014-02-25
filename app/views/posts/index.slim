@@ -1,0 +1,9 @@
+h1 Feed
+
+- if @posts.empty?
+  p 
+    | Looks like your feed is empty.
+    =< link_to "Get started by adding friends.", users_path
+
+- for post in @posts
+  = render partial: "posts/show", locals: { post: post }
